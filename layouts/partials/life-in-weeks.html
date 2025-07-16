@@ -35,6 +35,7 @@ There are three main loops in this page, each nested inside the other: Years, We
 {{ $.Store.Set "maxBoxesInRow" 21 }} {{- /* Keep it justified, right edge even */ -}}
 {{ $.Store.Set "boxEndMultiplier" .45 }} {{- /* Larger, adjust up or down for snugness */ -}}
 {{ $.Store.Set "boxCharMultiplier" .319 }} {{- /* Smaller, adjust up or down for snugness */ -}}
+{{ $.Store.Set "totalWeeksFromBirth" 0 }} {{- /* Tracks total weeks since birth */ -}}
 
 {{- /* Set starting values with first event */ -}}
 {{ range $date, $events := $data }}
@@ -80,9 +81,10 @@ There are three main loops in this page, each nested inside the other: Years, We
             {{ $buttonClass := printf "btn birthday %s %s text-nowrap" ($.Store.Get "basedClass") ($.Store.Get "doingClass") }}
             {{ $.Store.Set "buttonClass" $buttonClass }}
             {{ $.Store.Set "buttonDataDate" $thisYear }}
-            {{ $.Store.Set "buttonDataBSTitle" (printf "%s – Turned %d year%s old" (dateFormat "Jan 2, 2006" $thisYear) $age (cond (ne $age 1) "s" "")) }}
+            {{ $.Store.Set "buttonDataBSTitle" (printf "Week %d – Turned %d year%s old" ($.Store.Get "totalWeeksFromBirth") $age (cond (ne $age 1) "s" "")) }}
             {{ $buttonLabel := (printf "🎂 %d in %d" $age $year) }}
             {{ $.Store.Set "buttonLabel" $buttonLabel }}
+            {{ $.Store.Set "hasTooltip" true }}
 
             {{- /* Break if the button label will make the row too long */ -}}
             {{ $newRowBoxes := float (partial "helpers/calculate-row-boxes.html" (dict "Store" $.Store)) }}
@@ -111,13 +113,14 @@ There are three main loops in this page, each nested inside the other: Years, We
             {{ $thisWeekDate := $thisYearTime.AddDate 0 0 (mul $week 7 | int) | time.Format "2006-01-02" }}
             {{ $endYearDate := $thisWeekDate | time.AsTime | time.Format "2006-01-02" }}
             {{ if ne $week 0 }}
+                {{ $.Store.Set "totalWeeksFromBirth" (add ($.Store.Get "totalWeeksFromBirth") 1) }}
 
                 {{- /* Set stored vars for an empty week button */ -}}
                 {{ $buttonClass := printf "btn week %s %s w-100" ($.Store.Get "basedClass") ($.Store.Get "doingClass") }}
                 {{ $.Store.Set "buttonClass" $buttonClass }}
                 {{ $.Store.Set "buttonDataDate" $thisWeekDate }}
-                {{ $buttonDataBSTitle := (printf "%s – %s%s%s, based in %s"
-                    (dateFormat "Jan 2, 2006" $thisWeekDate)
+                {{ $buttonDataBSTitle := (printf "Week %d – %s%s%s, based in %s"
+                    ($.Store.Get "totalWeeksFromBirth")
                     ($.Store.Get "doing")
                     (cond (ne ($.Store.Get "association") "") " at " "")
                     ($.Store.Get "association")
@@ -125,6 +128,7 @@ There are three main loops in this page, each nested inside the other: Years, We
                 }}
                 {{ $.Store.Set "buttonDataBSTitle" $buttonDataBSTitle }}
                 {{ $.Store.Set "buttonLabel" "" }}
+                {{ $.Store.Set "hasTooltip" false }}
                 {{- /* Render empty week button */ -}}
                 {{ partial "helpers/box.html" (dict "Store" $.Store) }}
 
@@ -167,10 +171,10 @@ There are three main loops in this page, each nested inside the other: Years, We
                             {{ $.Store.Set "buttonClass" $buttonClass }}
                             {{ $.Store.Set "buttonDataDate" $specDate }}
                             {{ if ne .description nil }}
-                                {{ $.Store.Set "buttonDataBSTitle" (printf "%s – %s" (dateFormat "Jan 2, 2006" $specDate ) .description ) }}
+                                {{ $.Store.Set "buttonDataBSTitle" (printf "Week %d – %s" ($.Store.Get "totalWeeksFromBirth") .description ) }}
                             {{ else }}
-                                {{ $.Store.Set "buttonDataBSTitle" (printf "%s – %s%s%s, based in %s"
-                                    (dateFormat "Jan 2, 2006" $specDate)
+                                {{ $.Store.Set "buttonDataBSTitle" (printf "Week %d – %s%s%s, based in %s"
+                                    ($.Store.Get "totalWeeksFromBirth")
                                     ($.Store.Get "doing")
                                     (cond (ne ($.Store.Get "association") "") " at " "")
                                     ($.Store.Get "association")
@@ -179,6 +183,7 @@ There are three main loops in this page, each nested inside the other: Years, We
                             {{ end }}
                             {{ $buttonLabel := .headline }}
                             {{ $.Store.Set "buttonLabel" $buttonLabel }}
+                            {{ $.Store.Set "hasTooltip" true }}
 
                             {{- /* Break if the button label will make the row too long */ -}}
                             {{ $newRowBoxes := float (partial "helpers/calculate-row-boxes.html" (dict "Store" $.Store)) }}

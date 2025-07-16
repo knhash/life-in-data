@@ -39,20 +39,25 @@ The font is [IBM Plex Sans](https://fonts.google.com/specimen/IBM+Plex+Sans) loa
 
 ## Recent Updates
 
-### Design & Typography (Latest)
-- **🎨 Pine Green Theme**: Replaced orange accent colors with a calming pine green color palette
-- **📝 Typography Upgrade**: Switched from Red Hat Display to IBM Plex Sans for better web performance and readability
-- **⚡ Font Loading**: Migrated from local font files to Google Fonts CDN for improved loading
+### Tooltip System Improvements (Latest)
+- **Selective Tooltips**: Removed tooltips from empty week boxes to reduce visual clutter while preserving them for meaningful events and birthdays
+- **Week-Based Numbering**: Replaced calendar dates in tooltips with cumulative week numbers from birth (e.g., "Week 1300 – Turned 25 years old")
+- **Conditional Rendering**: Implemented smart tooltip activation using `hasTooltip` flag for better performance and user experience
+
+### Design & Typography
+- **Pine Green Theme**: Replaced orange accent colors with a calming pine green color palette
+- **Typography Upgrade**: Switched from Red Hat Display to IBM Plex Sans for better web performance and readability
+- **Font Loading**: Migrated from local font files to Google Fonts CDN for improved loading
 
 ### Navigation & UX Improvements
-- **🧭 Smart Scroll Padding**: Implemented dynamic scroll padding using CSS custom properties instead of fixed pixel values
-- **📱 Responsive Navigation**: Enhanced navbar padding system that automatically adjusts for different screen sizes
-- **🎯 Improved Anchor Links**: Fixed navigation scroll positioning to properly account for sticky header height
+- **Smart Scroll Padding**: Implemented dynamic scroll padding using CSS custom properties instead of fixed pixel values
+- **Responsive Navigation**: Enhanced navbar padding system that automatically adjusts for different screen sizes
+- **Improved Anchor Links**: Fixed navigation scroll positioning to properly account for sticky header height
 
 ### Technical Enhancements
-- **🔧 CSS Architecture**: Introduced CSS custom properties for maintainable color and spacing systems
-- **📐 Dynamic Calculations**: Navbar height now automatically calculated based on font sizes and padding
-- **🎨 Consistent Theming**: Centralized color management through CSS variables
+- **CSS Architecture**: Introduced CSS custom properties for maintainable color and spacing systems
+- **Dynamic Calculations**: Navbar height now automatically calculated based on font sizes and padding
+- **Consistent Theming**: Centralized color management through CSS variables
 
 ## More Life in Weeks
 

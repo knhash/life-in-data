@@ -1,7 +1,9 @@
 <button type="button"
     class="{{ $.Store.Get "buttonClass" }}"
     data-date="{{ $.Store.Get "buttonDataDate" }}"
+    {{- if $.Store.Get "hasTooltip" }}
     data-bs-toggle="tooltip"
     data-bs-placement="bottom"
     data-bs-custom-class="custom-tooltip"
-    data-bs-title="{{ $.Store.Get "buttonDataBSTitle" }}">{{ $.Store.Get "buttonLabel" }}</button>
+    data-bs-title="{{ $.Store.Get "buttonDataBSTitle" }}"
+    {{- end }}>{{ $.Store.Get "buttonLabel" }}</button>
