@@ -1,26 +1,21 @@
 :root {
-    --main-bg-color: #fff7e9;
-    --text-color: #3f5c72;
+    --main-bg-color: #f8faf8;
+    --text-color: #305d32;
     --header-text-color: var(--text-color);
     --link-color: var(--text-color);
-    --highlight-color: #f05d2b;
-    --future-border: #dee2e6;
-    --future-bg-color: #eee;
+    --highlight-color: #6dbc83;
+    --future-border: #d4e6d4;
+    --future-bg-color: #e8f5e8;
     --body-font-size-desktop: 16px;
     --body-font-size-mobile: 12px;
     --header-font-size-desktop: 72px;
     --header-font-size-mobile: 36px;
+    --navbar-padding-top: 3rem;
+    --navbar-height: calc(var(--header-font-size-desktop) + var(--navbar-padding-top) + 0.7rem);
+    --navbar-height-mobile: calc(var(--header-font-size-mobile) + var(--navbar-padding-top) + 0.7rem);
 }
 
-@font-face {
-    font-family: redhatdisplay-medium;
-    src: url(/fonts/RedHatDisplay-Medium.ttf);
-}
-
-@font-face {
-    font-family: redhatdisplay-xtrabold;
-    src: url(/fonts/RedHatDisplay-ExtraBold.ttf);
-}
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;700&display=swap');
 
 *,
 :after,
@@ -30,14 +25,14 @@
     color: inherit;
     margin: 0;
     padding: 0;
-    scroll-padding-top: 70px;
+    scroll-padding-top: var(--navbar-height);
     @media only screen and (max-width: 768px) {
-        scroll-padding-top: 62px;
+        scroll-padding-top: var(--navbar-height-mobile);
     }
 }
 
 body {
-    font-family: redhatdisplay-medium, serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     font-optical-sizing: auto;
@@ -53,7 +48,7 @@ body {
 }
 
 h1 {
-    font-family: redhatdisplay-xtrabold, serif;
+    font-family: 'IBM Plex Sans', sans-serif;
     font-weight: 800;
     font-size: var(--header-font-size-desktop);
     margin: 0;
